@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
+import { Modal } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
-import { Modal } from '@mui/material'; // Ajout de l'import manquant pour Modal
+import Typography from '@mui/material/Typography'; // Ajout de l'import manquant pour Modal
 import ProductDetail from 'src/sections/products/products-detail'; // Importer ProductDetail avant ShopProductCard
 import { Products } from 'src/_mock/products'; // Importez les données des produits
-import { useNavigate } from 'react-router-dom';
-import ShopProductCard from '../product-card';
+
 import ProductSort from '../product-sort';
+import ShopProductCard from '../product-card';
 import ProductCartWidget from '../product-cart-widget';
 
 

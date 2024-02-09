@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Modal } from '@mui/material';
-import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography'; // Ajout de l'import manquant pour Modal
@@ -9,7 +8,6 @@ import DetailDetail from 'src/sections/detailannonce/detail-detail'; // Importer
 import { MyComponent } from 'src/_mock/detailannonce'; // Importez les données des produits
 
 import DetailCard from '../detail-card';
-import DetailSort from '../detail-sort';
 import CartWidget from '../detail-cart-widget';
 
 
@@ -36,18 +34,6 @@ export default function DetailView() {
       <Typography variant="h4" sx={{ mb: 5 }}>
         Liste annonce
       </Typography>
-
-      <Stack
-        direction="row"
-        alignItems="center"
-        flexWrap="wrap-reverse"
-        justifyContent="flex-end"
-        sx={{ mb: 5 }}
-      >
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-          <DetailSort />
-        </Stack>
-      </Stack>
 
       <Grid container spacing={3}>
         {liste.map((product) => (

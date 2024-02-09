@@ -10,8 +10,6 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-import { fCurrency } from 'src/utils/format-number';
-
 import { insererAvecAxios } from 'src/_mock/favoris';
 
 import Label from 'src/components/label';
@@ -72,8 +70,7 @@ export default function DetailCard({ product }) {
   );
 
   const [showDetail, setShowDetail] = useState(false);
-  const [showheart, setShowheart] = useState(false);
-
+  
   const handleClick = () => {
     setShowDetail((prevShowDetail) => !prevShowDetail);
   };

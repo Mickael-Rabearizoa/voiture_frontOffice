@@ -1,13 +1,11 @@
-import { useState , useEffect  } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useState , useEffect  } from 'react';
 
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-// import { Posts } from 'src/_mock/blog';
 import { MyComponent } from 'src/_mock/blog';
 
 import PostCard from '../post-card';
@@ -34,9 +32,9 @@ async function fetchList(url) {
 export default function BlogView() {
   const liste = MyComponent();
 
-  const [list, setList] = useState([]);
+  const [setList] = useState([]);
 
-  const [open, setOpen] = useState(false);
+  const [setOpen] = useState(false);
   
   const handleOpen = (productId) => {
     setOpen(true);
@@ -51,7 +49,7 @@ export default function BlogView() {
       }
     }
     getList();
-  }, []);
+  }, [setList]);
 
   // const token = localStorage.getItem('token');
   // const navigate = useNavigate();

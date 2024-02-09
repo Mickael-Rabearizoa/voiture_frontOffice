@@ -1,18 +1,19 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react'; // Importer faker correctement
+import { useState, useEffect } from 'react';
 
-// ----------------------------------------------------------------------
 
-export function MyComponent() {
+export function Products() {
   const [list, setList] = useState([]);
-  // const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
+  const idutilisateur = localStorage.getItem('idutilisateur');
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('http://localhost:8080/V_AnnonceUtilisateur/getListAnnonceValide', {
+        const response = await axios.get(`http://localhost:8080/V_AnnonceFavorisUtilisateur/getAnnonceFavorisUtilisateur?Idutilisateur=${idutilisateur}`, {
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           }
       });
         setList(response.data);
@@ -22,9 +23,9 @@ export function MyComponent() {
     }
     console.log("Mety io eeee");
     fetchData();
-  }, []);
+  }, [token,idutilisateur]);
 
   return list; // Retourner le tableau de publications
 }
 
-export default MyComponent;
+export default Products;

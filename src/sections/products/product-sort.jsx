@@ -11,8 +11,8 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
-  { value: 'Vendu', label: 'Vendu' },
-  { value: 'A vendre', label: 'a vendre' },
+  { value: 'Vendu', label: 'Vendu' ,id:3},
+  { value: 'A vendre', label: 'a vendre',id:2 },
 ];
 
 export default function ShopProductSort() {
@@ -24,6 +24,12 @@ export default function ShopProductSort() {
 
   const handleClose = () => {
     setOpen(null);
+  };
+
+  const [setSelectedProduct] = useState(null);
+  const handleOpent = (id) => {
+    setSelectedProduct(id);
+    setOpen(true);
   };
 
   return (
@@ -57,7 +63,7 @@ export default function ShopProductSort() {
         }}
       >
         {SORT_OPTIONS.map((option) => (
-          <MenuItem key={option.value} selected={option.value === 'Vendu'} onClick={handleClose}>
+          <MenuItem key={option.value} onClick={() => handleOpent(option.id)}>
             {option.label}
           </MenuItem>
         ))}

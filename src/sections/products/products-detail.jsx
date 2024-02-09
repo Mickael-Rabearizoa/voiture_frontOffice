@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 
-import { fCurrency } from 'src/utils/format-number';
 import { Products } from 'src/_mock/products'; // Assurez-vous que products est importé correctement
 
 export default function ProductDetail({ productId }) {
   const liste=Products();
     const [open, setOpen] = useState(false);
     const foundProduct = liste.find((prod) => prod.id === productId);
-    const theme = useTheme();
   
     if (!foundProduct) {
       return <div>Aucun produit trouvé pour cet ID.</div>;
@@ -83,16 +81,30 @@ export default function ProductDetail({ productId }) {
           <Box p={3} style={{ overflowY: 'auto' }}>
           {renderdate}
         <Stack spacing={2} sx={{ mt: 2 }}>
-          <Typography color="inherit" variant="subtitle2" noWrap>
-           {foundProduct.name}
-           {foundProduct.description}
-           {foundProduct.nom_volant}
-           {foundProduct.nom_couleur}
-           {foundProduct.nom_carburant}
-           {foundProduct.nom_transmission}
-           {`${foundProduct.kilometrage}Km`}
-           {foundProduct.moteur}
-          </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {foundProduct.name}
+        </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {foundProduct.description}
+        </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {foundProduct.nom_volant}
+        </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {foundProduct.nom_couleur}
+        </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {foundProduct.nom_carburant}
+        </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {foundProduct.nom_transmission}
+        </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {`${foundProduct.kilometrage}Km`}
+        </Typography>
+        <Typography color="inherit" variant="subtitle2" noWrap>
+          {foundProduct.moteur}
+        </Typography>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           {renderPrice}
         </Stack>

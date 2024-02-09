@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { faker } from '@faker-js/faker'; // Importer faker correctement
+import { useState, useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 

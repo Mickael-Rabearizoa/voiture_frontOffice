@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 
-import { fCurrency } from 'src/utils/format-number';
 import { Products } from 'src/_mock/products'; // Assurez-vous que products est importé correctement
 
 export default function DetailDetail({ productId }) {
   const liste=Products();
     const [open, setOpen] = useState(false);
     const foundProduct = liste.find((prod) => prod.id_annonceutilisateur === productId);
-    const theme = useTheme();
   
     if (!foundProduct) {
       return <div>Veuillez vous connectés.</div>;

@@ -17,7 +17,7 @@ const navConfig = [
   //   path: '/user',
   //   icon: icon('ic_user'),
   // },
-  {
+  isConnected !== null && {
     title: 'Liste Favoris',
     path: '/products',
     icon: icon('ic_cart'),

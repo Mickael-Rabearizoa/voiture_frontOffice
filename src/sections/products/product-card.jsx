@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
 import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
+import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Typography from '@mui/material/Typography';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
+import Label from 'src/components/label';
 
 import ProductDetail from 'src/sections/products/products-detail';
-import React, { useState } from 'react';
-import { fCurrency } from 'src/utils/format-number';
-import Label from 'src/components/label';
 
 // ----------------------------------------------------------------------
 

@@ -7,7 +7,6 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton'; // Importer IconButton
-import Avatar from '@mui/material/Avatar';
 import { alpha } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Link as MuiLink } from '@mui/material';
@@ -23,7 +22,9 @@ import SvgColor from 'src/components/svg-color';
 
 export default function PostCard({ post, index }) {
   
-  const { cover, nom_modele, prix, annee, author, createdAt } = post;
+  const {nom_modele, prix, annee} = post;
+
+//  const { cover, nom_modele, prix, annee} = post;
   const [isLiked, setIsLiked] = useState(false); // État pour gérer si l'utilisateur a aimé le post
    // État pour gérer si l'utilisateur a aimé le post
   
@@ -126,20 +127,20 @@ export default function PostCard({ post, index }) {
     </Stack>
   );
 
-  const renderCover = (
-    <Box
-      component="img"
-      alt={nom_modele}
-      src={cover}
-      sx={{
-        top: 0,
-        width: 1,
-        height: 1,
-        objectFit: 'cover',
-        position: 'absolute',
-      }}
-    />
-  );
+  // const renderCover = (
+  //   <Box
+  //     component="img"
+  //     alt={nom_modele}
+  //     src={cover}
+  //     sx={{
+  //       top: 0,
+  //       width: 1,
+  //       height: 1,
+  //       objectFit: 'cover',
+  //       position: 'absolute',
+  //     }}
+  //   />
+  // );
 
   const renderDate = (
     <Typography
