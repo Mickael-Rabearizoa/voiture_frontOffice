@@ -1,50 +1,30 @@
-import { faker } from '@faker-js/faker';
+import axios from 'axios';
+import { useState, useEffect } from 'react'; // Importer faker correctement
 
 // ----------------------------------------------------------------------
 
-const POST_TITLES = [
-  'Toyota Corolla',
-  'Honda Civic',
-  'Ford Mustang',
-  'Chevrolet Camaro',
-  'BMW 3 Series',
-  'Mercedes-Benz C-Class',
-  'Audi A4',
-  'Volkswagen Golf',
-  'Subaru Outback',
-  'Tesla Model S',
-  'Lamborghini Huracan',
-  'Ferrari 488',
-  'Porsche 911',
-  'Mazda MX-5',
-  'Jeep Wrangler',
-  'Land Rover Range Rover',
-  'Volvo XC90',
-  'Kia Soul',
-  'Hyundai Sonata',
-  'Nissan Altima',
-  'Jaguar F-Pace',
-  'Lexus RX',
-  'Acura MDX',
-  'Infiniti Q50',
-  'Buick Encore',
-  'Cadillac Escalade',
-  'Lincoln Navigator',
-  'GMC Sierra',
-  'Chrysler Pacifica',                                                                                 
-  'Dodge Challenger',
-];
+export function MyComponent() {
+  const [list, setList] = useState([]);
+  // const token = localStorage.getItem('token');
 
-export const posts = [...Array(23)].map((_, index) => ({
-  id: faker.string.uuid(),
-  cover: `/assets/images/covers/cover_${index + 1}.jpg`,
-  title: POST_TITLES[index + 1],
-  createdAt: faker.date.past(),
-  prix: faker.number.float(99999999),
-  anne: faker.number.int(9999),
-  author: {
-    name: faker.person.fullName(),
-    avatarUrl: `/assets/images/avatars/avatar.jpg`,
-  },
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get('http://localhost:8080/V_AnnonceUtilisateur/getListAnnonceValide', {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+      });
+        setList(response.data);
+      } catch (error) {
+        console.error('Une erreur s\'est produite lors de la récupération de la liste:', error);
+      }
+    }
+    console.log("Mety io eeee");
+    fetchData();
+  }, []);
 
-}));
+  return list; // Retourner le tableau de publications
+}
+
+export default MyComponent;

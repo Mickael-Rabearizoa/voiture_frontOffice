@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -21,25 +22,84 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function LoginView() {
+
+  localStorage.removeItem('token');
+  console.log("token supprimer");
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const theme = useTheme();
 
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClick = () => {
-    router.push('/dashboard');
+  const jsonData = {
+    login: email,
+    motDePasse: password,
+  };
+
+  const handleClick = async () => {
+    // router.push('/dashboard');
+    console.log(email, password);
+    try {
+      const response = await axios.post('https://ventevoiture-production-989c.up.railway.app/login/auth', JSON.stringify(jsonData), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const responseData = response.data;
+  
+      console.log(responseData);
+      console.log(responseData.response.token);
+  
+      localStorage.setItem('token', responseData.response.token);
+      localStorage.setItem('email', email);
+      console.log(response.request);
+      const token = localStorage.getItem('token');
+
+      const response2= await axios.get(`https://ventevoiture-production-989c.up.railway.app/login/findByLogin?login=${email}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      console.log(response2.data.response);
+
+      localStorage.setItem('nom', response2.data.response.nom);
+      localStorage.setItem('prenom', response2.data.response.prenom);
+      localStorage.setItem('idutilisateur', response2.data.response.idutilisateur);
+
+
+      // localStorage.setItem('token', responseData.response.token);
+      router.push('/blog');
+    } catch (error) {
+      console.log("erroreeeeaaa", error);
+      console.error(error.message);
+
+      const statusCode = error.response.status;
+      if (statusCode === 401) {
+        alert('reverifiez le nom ou le mdp');
+        console.log('reverifiez le nom ou le mdp');
+      }
+    }
   };
 
   const renderForm = (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField name="email" label="Email address" placeholder="alice_admin@gmail.com"
+        onChange={(e) => setEmail(e.target.value)}
+         />
 
         <TextField
           name="password"
           label="Password"
+          placeholder="motdepasse1"
           type={showPassword ? 'text' : 'password'}
+          onChange={(e) => setPassword(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
