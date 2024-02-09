@@ -22,33 +22,41 @@ import SvgColor from 'src/components/svg-color';
 // ----------------------------------------------------------------------
 
 export default function PostCard({ post, index }) {
-  const { cover, title, prix, annee, author, createdAt } = post;
+  
+  const { cover, nom_modele, prix, annee, author, createdAt } = post;
   const [isLiked, setIsLiked] = useState(false); // État pour gérer si l'utilisateur a aimé le post
+   // État pour gérer si l'utilisateur a aimé le post
+  
+  const handleClick = () => {
+    setIsLiked(() => setIsLiked(!isLiked));
+    // MyComponent(post.id);
+  };
 
   const latestPostLarge = index === -1;
 
   const latestPost = index === -1 || index === -1;
-  const renderAvatar = (
-    <Avatar
-      alt={author.name}
-      src={author.avatarUrl}
-      sx={{
-        zIndex: 9,
-        width: 32,
-        height: 32,
-        position: 'absolute',
-        left: (theme) => theme.spacing(3),
-        bottom: (theme) => theme.spacing(-2),
-        ...((latestPostLarge || latestPost) && {
-          zIndex: 9,
-          top: 24,
-          left: 24,
-          width: 40,
-          height: 40,
-        }),
-      }}
-    />
-  );
+  
+  // const renderAvatar = (
+  //   <Avatar
+  //     alt={author.name}
+  //     src={author.avatarUrl}
+  //     sx={{
+  //       zIndex: 9,
+  //       width: 32,
+  //       height: 32,
+  //       position: 'absolute',
+  //       left: (theme) => theme.spacing(3),
+  //       bottom: (theme) => theme.spacing(-2),
+  //       ...((latestPostLarge || latestPost) && {
+  //         zIndex: 9,
+  //         top: 24,
+  //         left: 24,
+  //         width: 40,
+  //         height: 40,
+  //       }),
+  //     }}
+  //   />
+  // );
 
   const renderTitle = (
     <Box>
@@ -69,7 +77,7 @@ export default function PostCard({ post, index }) {
           }),
         }}
       >
-        {title}
+        {nom_modele}
       </Link>
       <Typography
         variant="body1"
@@ -121,7 +129,7 @@ export default function PostCard({ post, index }) {
   const renderCover = (
     <Box
       component="img"
-      alt={title}
+      alt={nom_modele}
       src={cover}
       sx={{
         top: 0,
@@ -146,7 +154,7 @@ export default function PostCard({ post, index }) {
         }),
       }}
     >
-      {fDate(createdAt)}
+      {fDate(annee)}
     </Typography>
   );
 
@@ -194,9 +202,9 @@ export default function PostCard({ post, index }) {
         >
           {renderShape}
 
-          {renderAvatar}
+          {/* {renderAvatar} */}
 
-          {renderCover}
+          {/* {renderCover} */}
         </Box>
 
         <Box
@@ -218,7 +226,7 @@ export default function PostCard({ post, index }) {
 
         <Box sx={{ p: 3 }}>
           <Stack direction="row" spacing={1}>
-            <IconButton onClick={() => setIsLiked(!isLiked)}>
+            <IconButton onClick={handleClick}>
               <Iconify icon={isLiked ? 'ic:baseline-favorite' : 'ic:outline-favorite-border'} />
             </IconButton>
             <MuiLink href="/detail" underline="none">

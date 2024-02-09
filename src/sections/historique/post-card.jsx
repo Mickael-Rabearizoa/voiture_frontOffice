@@ -21,7 +21,9 @@ import SvgColor from 'src/components/svg-color';
 // ----------------------------------------------------------------------
 
 export default function PostCard({ post, index }) {
-  const { cover, title, prix , annee, author, createdAt } = post;
+  // const { cover, title, prix , annee, author, createdAt } = post;
+  const { cover, title, prix , annee } = post;
+
   const etatvoiture = 'vendu';
 
   const [etatColor, setEtatColor] = useState(''); // Utilisation de useState pour stocker la couleur de l'état de la voiture
@@ -53,27 +55,27 @@ export default function PostCard({ post, index }) {
     </Typography>
   );
 
-  const renderAvatar = (
-    <Avatar 
-      alt={author.name}
-      src={author.avatarUrl}
-      sx={{
-        zIndex: 9,
-        width: 32,
-        height: 32,
-        position: 'absolute',
-        left: (theme) => theme.spacing(3),
-        bottom: (theme) => theme.spacing(-2),
-        ...((latestPostLarge || latestPost) && {
-          zIndex: 9,
-          top: 24,
-          left: 24,
-          width: 40,
-          height: 40,
-        }),
-      }}
-    />
-  );
+  // const renderAvatar = (
+  //   <Avatar 
+  //     alt={author.name}
+  //     src={author.avatarUrl}
+  //     sx={{
+  //       zIndex: 9,
+  //       width: 32,
+  //       height: 32,
+  //       position: 'absolute',
+  //       left: (theme) => theme.spacing(3),
+  //       bottom: (theme) => theme.spacing(-2),
+  //       ...((latestPostLarge || latestPost) && {
+  //         zIndex: 9,
+  //         top: 24,
+  //         left: 24,
+  //         width: 40,
+  //         height: 40,
+  //       }),
+  //     }}
+  //   />
+  // );
 
   const renderTitle = (
     <Box>
@@ -171,7 +173,7 @@ export default function PostCard({ post, index }) {
         }),
       }}
     >
-      {fDate(createdAt)}
+      {fDate(annee)}
     </Typography>
   );
 
@@ -219,7 +221,7 @@ export default function PostCard({ post, index }) {
         >
           {renderShape}
 
-          {renderAvatar}
+          {/* {renderAvatar} */}
 
           {renderCover}
         </Box>

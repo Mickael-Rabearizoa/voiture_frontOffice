@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -27,10 +26,13 @@ import navConfig from './config-navigation';
 
 export default function Nav({ openNav, onCloseNav }) {
   const pathname = usePathname();
+  const nom = localStorage.getItem('nom');
+  const prenom = localStorage.getItem('prenom');
 
   const upLg = useResponsive('up', 'lg');
 
-  const idUser = 1;
+  // const idUser = 1;
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     if (openNav) {
@@ -55,7 +57,7 @@ export default function Nav({ openNav, onCloseNav }) {
       <Avatar src={account.photoURL} alt="photoURL" />
 
       <Box sx={{ ml: 2 }}>
-        <Typography variant="subtitle2">{account.displayName}</Typography>
+        <Typography variant="subtitle2">{`${nom} ${prenom}`}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {account.role}
@@ -114,7 +116,7 @@ export default function Nav({ openNav, onCloseNav }) {
     >
       <Logo sx={{ mt: 3, ml: 4 }} />
   
-      {idUser !== null ? renderAccount : null}
+      {token !== null ? renderAccount : null}
   
       {renderMenu}
   

@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -18,36 +20,15 @@ import Searchbar from './common/searchbar';
 import { NAV, HEADER } from './config-layout';
 import AccountPopover from './common/account-popover';
 
-// ----------------------------------------------------------------------
-
 export default function Header({ onOpenNav }) {
   const theme = useTheme();
-
   const lgUp = useResponsive('up', 'lg');
-  const idUser = null;
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const navigate = useNavigate();
 
-  const renderContent = (
-    <>
-      {!lgUp && (
-        <IconButton onClick={onOpenNav} sx={{ mr: 1 }}>
-          <Iconify icon="eva:menu-2-fill" />
-        </IconButton>
-      )}
-
-      <Searchbar />
-
-      <Box sx={{ flexGrow: 1 }} />
-
-      <Stack direction="row" alignItems="center" spacing={1}>
-        {idUser ? (
-          <AccountPopover />
-        ) : (
-          <Button variant="contained">SE CONNECTER</Button>
-        )}
-      </Stack>
-
-    </>
-  );
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
 
   return (
     <AppBar
@@ -71,9 +52,36 @@ export default function Header({ onOpenNav }) {
         sx={{
           height: 1,
           px: { lg: 5 },
+          justifyContent: 'space-between', // Aligner les éléments de la toolbar sur les côtés
         }}
       >
-        {renderContent}
+        <Box>
+          {!lgUp && (
+            <IconButton onClick={onOpenNav} sx={{ mr: 1 }}>
+              <Iconify icon="eva:menu-2-fill" />
+            </IconButton>
+          )}
+          <Searchbar />
+        </Box>
+
+        <Stack direction="row" alignItems="center" spacing={1}>
+          {token ? ( // Si un token existe, afficher le composant AccountPopover
+            <AccountPopover />
+          ) : ( // Sinon, afficher le bouton LOGIN avec les styles personnalisés
+            <Button
+              onClick={handleLoginClick}
+              color="inherit" // Couleur du texte
+              sx={{
+                backgroundColor: '#3a90f5', // Couleur de fond
+                '&:hover': {
+                  backgroundColor: '#1f6bd5', // Couleur de fond au survol
+                },
+              }}
+            >
+              LOGIN
+            </Button>
+          )}
+        </Stack>
       </Toolbar>
     </AppBar>
   );

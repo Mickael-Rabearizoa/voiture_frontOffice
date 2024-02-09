@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { useTheme, useMediaQuery } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import { posts } from 'src/_mock/blog';
+import { MyComponent } from 'src/_mock/blog';
 
 import PostCard from './post-card';
 
@@ -24,7 +24,7 @@ export default function BlogView() {
       <Grid container spacing={3}>
         <Grid item xs={isSmallScreen ? 12 : 8} md={8}>
           <Grid container spacing={3}>
-            {posts.map((post, index) => (
+            {MyComponent.map((post, index) => (
               <PostCard key={post.id} post={post} index={index} />
             ))}
           </Grid>
