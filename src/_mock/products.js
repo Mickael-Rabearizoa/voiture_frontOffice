@@ -10,7 +10,7 @@ export function Products() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`http://localhost:8080/V_AnnonceFavorisUtilisateur/getAnnonceFavorisUtilisateur?Idutilisateur=${idutilisateur}`, {
+        const response = await axios.get(`https://ventevoiture-production-989c.up.railway.app/V_AnnonceFavorisUtilisateur/getAnnonceFavorisUtilisateur?Idutilisateur=${idutilisateur}`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

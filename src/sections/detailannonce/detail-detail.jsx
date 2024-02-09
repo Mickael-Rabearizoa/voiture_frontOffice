@@ -13,7 +13,7 @@ import { Products } from 'src/_mock/products'; // Assurez-vous que products est 
 export default function DetailDetail({ productId }) {
   const liste=Products();
     const [open, setOpen] = useState(false);
-    const foundProduct = liste.find((prod) => prod.id_annonceutilisateur === productId);
+    const foundProduct = liste.find((prod) => prod.Id_Annonceutilisateur === productId);
   
     if (!foundProduct) {
       return <div>Veuillez vous connectés.</div>;

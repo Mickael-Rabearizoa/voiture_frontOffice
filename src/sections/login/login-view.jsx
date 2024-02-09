@@ -44,7 +44,7 @@ export default function LoginView() {
     // router.push('/dashboard');
     console.log(email, password);
     try {
-      const response = await axios.post('http://localhost:8080/login/auth', JSON.stringify(jsonData), {
+      const response = await axios.post('https://ventevoiture-production-989c.up.railway.app/login/auth', JSON.stringify(jsonData), {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -60,7 +60,7 @@ export default function LoginView() {
       console.log(response.request);
       const token = localStorage.getItem('token');
 
-      const response2= await axios.get(`http://localhost:8080/login/findByLogin?login=${email}`, {
+      const response2= await axios.get(`https://ventevoiture-production-989c.up.railway.app/login/findByLogin?login=${email}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -90,13 +90,14 @@ export default function LoginView() {
   const renderForm = (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address"
+        <TextField name="email" label="Email address" placeholder="alice_admin@gmail.com"
         onChange={(e) => setEmail(e.target.value)}
          />
 
         <TextField
           name="password"
           label="Password"
+          placeholder="motdepasse1"
           type={showPassword ? 'text' : 'password'}
           onChange={(e) => setPassword(e.target.value)}
           InputProps={{
