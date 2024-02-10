@@ -8,32 +8,41 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { Products } from 'src/_mock/products'; // Assurez-vous que products est importé correctement
+import {Photo} from 'src/_mock/photo';
+import { Products } from 'src/_mock/products';
+ // Assurez-vous que products est importé correctement
 
 export default function ProductDetail({ productId }) {
   const liste=Products();
     const [open, setOpen] = useState(false);
-    const foundProduct = liste.find((prod) => prod.id === productId);
+    const foundProduct = liste.find((prod) => prod.Id_Annonceutilisateur === productId);
   
+    const lis=Photo(productId.Id_Annonceutilisateur);
+
+
     if (!foundProduct) {
       return <div>Aucun produit trouvé pour cet ID.</div>;
     }
   
-    // const renderImages = foundProduct.more.map((image, index) => (
-    //   <Box
-    //     key={index}
-    //     component="img"
-    //     alt={foundProduct.name}
-    //     src={image}
-    //     sx={{
-    //       maxWidth: '30%',
-    //       height: '30%',
-    //       mr: 2, // Espacement horizontal entre les images
-    //       mb: 2, // Espacement vertical entre les images
-    //       borderRadius: theme.spacing(2),
-    //     }}
-    //   />
-    // ));
+    const renderImg = (
+      <>
+        {lis.map((producte,index) => (
+          <Box
+            key={index} // Assurez-vous d'avoir une clé unique pour chaque élément dans une liste de rendu
+            component="img"
+            alt={producte.nomphoto} // Assurez-vous d'utiliser le nom de la variable correcte ici
+            src={producte.nomphoto} // Utilisez photoUrl au lieu de product.cover pour obtenir chaque URL de photo de la liste
+            sx={{
+              top: 0,
+              width: 1,
+              height: 1,
+              objectFit: 'cover',
+              position: 'absolute',
+            }}
+          />
+        ))}
+      </>
+    );
   
     const renderPrice = (
       <Typography variant="subtitle1">
@@ -79,6 +88,7 @@ export default function ProductDetail({ productId }) {
         <Dialog onClose={() => setOpen(false)} open={open} >
           <Card style={{ maxHeight: 700 }}>
           <Box p={3} style={{ overflowY: 'auto' }}>
+          {renderImg}
           {renderdate}
         <Stack spacing={2} sx={{ mt: 2 }}>
         <Typography color="inherit" variant="subtitle2" noWrap>

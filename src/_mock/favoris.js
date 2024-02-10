@@ -7,7 +7,7 @@ export const insererAvecAxios = async ( Id_Annonceutilisateur ) => {
     const token = localStorage.getItem('token');
     const  userid = localStorage.getItem('idutilisateur');
     // Effectuez une requête POST avec Axios en incluant l'ID
-    const reponse = await axios.get(`http://localhost:8080/annoncefavoris/insertAnnoncefavoris?Id_Annonceutilisateur=${Id_Annonceutilisateur}&Idutilisateur=${userid}`,
+    const reponse = await axios.get(`https://ventevoiture-production-989c.up.railway.app/insertAnnoncefavoris?Id_Annonceutilisateur=${Id_Annonceutilisateur}&Idutilisateur=${userid}`,
     { headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`

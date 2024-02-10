@@ -9,15 +9,19 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
+import {Photo} from 'src/_mock/photo';
+
 import Label from 'src/components/label';
 
 import ProductDetail from 'src/sections/products/products-detail';
+
 
 // ----------------------------------------------------------------------
 
 export default function ShopProductCard({ product }) {
 
-
+  const liste=Photo(product.Id_Annonceutilisateur);
+  console.log('photo',liste);
   const renderStatus = (
     <Label
       variant="filled"
@@ -34,20 +38,27 @@ export default function ShopProductCard({ product }) {
     </Label>
   );
 
-  // const renderImg = (
-  //   <Box
-  //     component="img"
-  //     alt={product.name}
-  //     src={product.cover}
-  //     sx={{
-  //       top: 0,
-  //       width: 1,
-  //       height: 1,
-  //       objectFit: 'cover',
-  //       position: 'absolute',
-  //     }}
-  //   />
-  // );
+
+  const renderImg = (
+    <>
+      {liste.map((producte,index) => (
+        <Box
+          key={index} // Assurez-vous d'avoir une clé unique pour chaque élément dans une liste de rendu
+          component="img"
+          alt={producte.nomphoto} // Assurez-vous d'utiliser le nom de la variable correcte ici
+          src={producte.nomphoto} // Utilisez photoUrl au lieu de product.cover pour obtenir chaque URL de photo de la liste
+          sx={{
+            top: 0,
+            width: 1,
+            height: 1,
+            objectFit: 'cover',
+            position: 'absolute',
+          }}
+        />
+      ))}
+    </>
+  );
+  
 
   const renderPrice = (
     <Typography variant="subtitle1">
@@ -77,10 +88,12 @@ export default function ShopProductCard({ product }) {
     <Card sx={{ maxWidth: 400, margin: 'auto' }}>
       <Box sx={{pt:'100%',position :'relative'}}>
       {product.status && renderStatus}
+      {renderImg}
       </Box>
       <Stack spacing={2} sx={{ p: 3 }}>
         <Link color="inherit"  variant="subtitle2" noWrap>
           {product.nom_modele}
+          {product.Id_Annonceutilisateur}
         </Link>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           {renderPrice}
@@ -88,7 +101,7 @@ export default function ShopProductCard({ product }) {
         <Button onClick={handleClick}>
         <ArrowDownwardIcon />
         </Button>
-          {showDetail && <ProductDetail productId={product.id} />} {/* utilisez productId au lieu de product */}
+          {showDetail && <ProductDetail productId={product.Id_Annonceutilisateur} />} {/* utilisez productId au lieu de product */}
       </Stack>
     </Card>
   );
